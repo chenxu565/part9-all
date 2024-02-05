@@ -1,11 +1,23 @@
+import { isNotNumber } from "./utils";
+
+const parseBmiArguments = (args: string[]): { height: number, weight: number } => {
+    if (args.length !== 4) throw new Error('Usage: npm run calculateBmi <height>(cm) <weight>(kg)');
+
+    const height = Number(args[2]);
+    const weight = Number(args[3]);
+
+    if (isNotNumber(height) || isNotNumber(weight)) {
+        throw new Error('Provided values must be numbers!');
+    }
+
+    return { height, weight };
+};
+
 function calculateBmi(height: number, weight: number): string {
-    // Convert height from cm to meters
     let heightInMeters = height / 100;
 
-    // Calculate BMI
     let bmi = weight / (heightInMeters * heightInMeters);
 
-    // Determine BMI category
     if (bmi < 18.5) {
         return 'Underweight';
     } else if (bmi < 25) {
@@ -17,5 +29,13 @@ function calculateBmi(height: number, weight: number): string {
     }
 }
 
-// Call the function and print the result
-console.log(calculateBmi(180, 74));
+try {
+    const { height, weight } = parseBmiArguments(process.argv);
+    console.log(calculateBmi(height, weight));
+} catch (error: unknown) {
+    let errorMessage = 'Error: ';
+    if (error instanceof Error) {
+        errorMessage += error.message;
+    }
+    console.log(errorMessage);
+}
