@@ -14,9 +14,9 @@ const parseBmiArguments = (args: string[]): { height: number, weight: number } =
 };
 
 function calculateBmi(height: number, weight: number): string {
-    let heightInMeters = height / 100;
+    const heightInMeters = height / 100;
 
-    let bmi = weight / (heightInMeters * heightInMeters);
+    const bmi = weight / (heightInMeters * heightInMeters);
 
     if (bmi < 18.5) {
         return 'Underweight';
