@@ -13,11 +13,11 @@ app.get('/bmi', (req, res) => {
   const weight = req.query.weight as string;
 
   if (!height || !weight || height.trim() === "" || weight.trim() === "") {
-    res.json({ error: "malformatted parameters"});
+    res.status(400).json({ error: "malformatted parameters"});
   }
 
   if (isNotNumber(height) || isNotNumber(weight)) {
-    res.json({ error: "malformatted parameters"});
+    res.status(400).json({ error: "malformatted parameters"});
   }
 
   const bmiText = calculateBmi(Number(height), Number(weight));
