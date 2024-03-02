@@ -12,6 +12,9 @@ const Content = (props: ContentProps) => {
       <p>
         {props.courseParts[2].name} {props.courseParts[2].exerciseCount}
       </p>
+      <p>
+        {props.courseParts[3].name} {props.courseParts[3].exerciseCount}
+      </p>
     </div>
   );
 };
