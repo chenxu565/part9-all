@@ -6,7 +6,7 @@ function App() {
     <div>
       sample
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
