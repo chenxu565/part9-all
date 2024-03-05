@@ -1,15 +1,22 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { DiaryEntry } from '../../../src/types';
-
 import diaryService from '../services/diaryService';
 
-const Diaries = () => {
-  const [diaries, setDaries] = useState<DiaryEntry[]>([]);
+interface Props {
+  diaries: DiaryEntry[];
+  setDiaries: React.Dispatch<React.SetStateAction<DiaryEntry[]>>;
+}
+
+const Diaries = ({diaries, setDiaries} : Props) => {
 
   useEffect( () => {
     diaryService.getAllDiaries()
-      .then((diaries) => setDaries(diaries));
-  }, []);
+      .then((diaries) => {
+        console.log(diaries);
+        return diaries;})
+      .then((diaries) => setDiaries(diaries));
+      
+  }, [setDiaries]);
 
   return (
     <div>

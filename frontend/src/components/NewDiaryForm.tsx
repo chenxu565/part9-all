@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-// import { TextField, Button } from '@mui/material';
-// import NewDiaryEntry from '../../../src/types';
+import { DiaryEntry } from '../../../src/types';
 import axios from 'axios';
 import diaryService from '../services/diaryService';
 import { Weather, Visibility } from '../../../src/types';
 
-const NewDiaryForm = () => {
+interface Props {
+  diaries: DiaryEntry[];
+  setDiaries: React.Dispatch<React.SetStateAction<DiaryEntry[]>>;
+}
+
+const NewDiaryForm = ({diaries, setDiaries}: Props) => {
   const [date, setDate] = useState('');
   const [weather, setWeather] = useState(Weather.Sunny);
   const [visibility, setVisibility] = useState(Visibility.Great);
@@ -24,6 +28,7 @@ const NewDiaryForm = () => {
     try {
       const response = await diaryService.createDiary(newDiary);
       console.log(response);
+      setDiaries(diaries.concat(response));
     } catch (e) {
       if (axios.isAxiosError(e)) {
         if (e?.response?.data && typeof e?.response?.data === 'string') {
