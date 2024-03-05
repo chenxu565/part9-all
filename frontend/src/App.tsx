@@ -1,10 +1,12 @@
-// import { useState } from 'react'
+import NewDiaryForm from "./components/NewDiaryForm";
+import Diaries from "./components/Diaries";
 
 function App() {
 
   return (
     <div>
-      sample
+      <NewDiaryForm />
+      <Diaries />
     </div>
   );
 }
